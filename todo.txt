@@ -4,6 +4,7 @@
 - [ ] userfs
     - [ ] rootfs squashfs
     - [ ] userfs btrfs
+    - [ ] overlayfs
 - [ ] wifi
 - [ ] swupdate
     - [ ] read: <https://sbabic.github.io/swupdate/building-with-yocto.html>

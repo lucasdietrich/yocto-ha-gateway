@@ -6,9 +6,8 @@ LICENSE = "CLOSED"
 
 IMAGE_INSTALL:append = "\
     packagegroup-core-boot \
+    packagegroup-ha-bsp \
     packagegroup-core-base-utils \
-    os-release \
-    ca-certificates \
     openssl \
     mbedtls \
     nginx \

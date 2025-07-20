@@ -1,0 +1,4 @@
+/build
+!/build/conf
+/.venv
+/tmp

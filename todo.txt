@@ -1,0 +1,11 @@
+- [ ] 2x CAN hat support
+    - [ ] udev-rules-rpi package
+- [ ] virtualization
+- [ ] userfs
+    - [ ] rootfs squashfs
+    - [ ] userfs btrfs
+- [ ] wifi
+- [ ] swupdate
+    - [ ] read: <https://sbabic.github.io/swupdate/building-with-yocto.html>
+    - [ ] read: <https://mkrak.org/2018/01/26/updating-embedded-linux-devices-part2/>
+    - [ ] swupdate webserver

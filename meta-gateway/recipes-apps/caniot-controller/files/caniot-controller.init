@@ -1,0 +1,45 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          caniot-controller
+# Required-Start:    $syslog $network $ntpd
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: CANIOT Rust Controller
+# Description:       CANIOT Rust Controller controller and http + grpc server
+### END INIT INFO
+
+NAME=caniot-controller
+DESC="CANIOT Rust CAN"
+
+EXE=/usr/bin/caniot-controller
+CONFIG=/etc/caniot-controller/caniot-controller.toml
+ARGS="-c $CONFIG"
+
+test -f $EXE || exit 0
+
+case "$1" in
+    start)
+        echo -n "* starting $DESC: $NAME... "
+        start-stop-daemon -S -b -x $EXE --name $NAME -- $ARGS
+        echo "done."
+        ;;
+    stop)
+        echo -n "* stopping $DESC: $NAME... "
+        start-stop-daemon -K -x $EXE
+        echo "done."
+        ;;
+    restart)
+        echo "* restarting $DESC: $NAME... "
+        $0 stop
+        sleep 1
+        $0 start
+        echo "done."
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+
+exit 0

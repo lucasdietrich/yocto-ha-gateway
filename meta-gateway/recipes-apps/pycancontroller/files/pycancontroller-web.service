@@ -1,0 +1,15 @@
+[Unit]
+Description=CANIOT Python Controller controller and http server
+After=network.target
+
+[Service]
+Type=simple
+ExecStartPre=/usr/bin/test -f /usr/bin/python3
+ExecStart=/usr/bin/python3 -m cancontroller.controller.controller --config=/etc/pycancontroller/config.toml
+Environment="CANIOT_PYCONTROLLER_PYTHONPATH_AUTO_ADD="
+Restart=on-failure
+User=nobody
+Group=nogroup
+
+[Install]
+WantedBy=multi-user.target

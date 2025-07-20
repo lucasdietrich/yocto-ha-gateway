@@ -1,0 +1,9 @@
+[config]
+http_grpc_host = "localhost"
+http_grpc_port = 50051
+http_host = "localhost"
+http_port = 8080
+can_bus = "can0"
+can_bitrate = 500000
+can_log_file = "/var/volatile/tmp/can_log_file.asc"
+grpc_listen_addr = "localhost:50051"

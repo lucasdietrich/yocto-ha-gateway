@@ -1,0 +1,44 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          pycancontroller-web
+# Required-Start:    $syslog $network $ntpd
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: CANIOT Python Controller
+# Description:       CANIOT Python Controller controller and http server
+### END INIT INFO
+
+DAEMON=/usr/bin/python3
+NAME=pycancontroller-web
+DESC="CANIOT Python WEB"
+ARGS="-m cancontroller.httpserver.server --config=/etc/pycancontroller/config.toml"
+
+test -f $DAEMON || exit 0
+
+case "$1" in
+    start)
+        echo -n "* Start $DESC: $NAME... "
+        CANIOT_PYCONTROLLER_PYTHONPATH_AUTO_ADD= start-stop-daemon -S -b -x $DAEMON --name $NAME -- $ARGS
+	    echo "$NAME."
+    ;;
+    stop)
+        echo -n "* Stopping $DESC: $NAME... "
+        start-stop-daemon -K -x $DAEMON
+	    echo "$NAME."
+    ;;
+    restart)
+        echo -n "* Restarting $DESC: $NAME ... "
+        $0 stop
+        sleep 1
+        $0 start
+	    echo "$NAME."
+    ;;
+    *)
+        N=/etc/init.d/$NAME
+        echo "Usage: $N {start|stop|restart}" >&2
+        exit 1
+    ;;
+esac
+
+exit 0

@@ -5,7 +5,7 @@ LICENSE = "CLOSED"
 SRC_URI = "git://github.com/lucasdietrich/userfs.git;protocol=https;branch=main \
            file://init-user-fs.sh \
            "
-SRCREV = "fca3c71c886e278fa769a1c905eda576c31f7869"
+SRCREV = "ec73aba29af0551c732a77197dfb290d58ecd68b"
 
 DEPENDS += "util-linux"
 RDEPENDS:${PN} += "util-linux-libfdisk"

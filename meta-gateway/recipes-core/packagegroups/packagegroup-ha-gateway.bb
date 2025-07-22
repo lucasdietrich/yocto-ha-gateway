@@ -6,6 +6,7 @@ inherit packagegroup
 # populate here
 RDEPENDS:${PN} = "\
     ha-environment \
+    dnsmasq \
     ntpd-start \
     caniot-controller \
     nginx \

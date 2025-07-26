@@ -52,3 +52,43 @@ BBLAYERS ?= " \
 ## References:
 
 - [Raspberry Pi ASAP Setup Guide](https://kr15h.github.io/RPi-Setup/)
+
+## Swupdate
+
+Build swupdate image:
+
+    bitbake mc:rpi3ha-64:ha-swupdate-image
+
+Run swupdate
+
+    /usr/bin/swupdate -v -w -r/www -p 8080 -H rpi3:1.0
+
+Upload the image to the device:
+
+    curl -F "file=@tmp-rpi3ha-64/deploy/images/rpi3ha-64/ha-image-rpi3ha-64.rootfs.swu" http://192.168.10.70:8080/upload
+
+Decrompress the swu file:
+
+    cpio -iv -H crc < /home/lucas/yocto/yocto-ha-gateway/build/tmp-rpi3ha-64/deploy/images/rpi3ha-64/ha-image-rpi3ha-64.rootfs.swu
+
+Desired config 
+
+```
+software =
+{
+	version = "0.1.0";
+	hardware-compatibility: [ "1.0" ];
+
+	rpi3 = {
+		images: (
+			{
+				filename = "ha-image-@@MACHINE@@.rootfs.ext3.gz";
+				type = "raw";
+				device = "/dev/mmcblk0p2";
+				compressed = "zlib";
+				sha256 = "$swupdate_get_sha256(ha-image-@@MACHINE@@.rootfs.ext3.gz)";
+			}
+		);
+	}
+}
+```

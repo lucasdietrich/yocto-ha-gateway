@@ -2,11 +2,9 @@
 # long-description: Creates a partitioned SD card image for use with
 # Raspberry Pi. Boot files are located in the first vfat partition.
 
+# raspberry pi 1, 2, 3 seems to not support GPT, so we use MBR
+# bootloader --ptable gpt
+
 part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 4096 --size 100
-part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label root --align 4096
-#part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label root --align 4096 --size 1G
-
-#part / --ondisk mmcblk0 --fstype=ext4 --label root --align 4096 --size 1G
-
-# https://docs.yoctoproject.org/singleindex.html#openembedded-kickstart-wks-reference
-#part /mnt/userfs --ondisk mmcblk0 --fstype=ext4 --label userfs --align 4096 --size 400M
+part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label root --align 4096 --fixed-size 512M
+part --ondisk mmcblk0 --fstype=ext4 --label root2 --align 4096 --fixed-size 512M

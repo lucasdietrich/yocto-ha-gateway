@@ -11,5 +11,4 @@ RDEPENDS:${PN} = "\
     caniot-controller \
     nginx \
     tzdata \
-    overlays-init-script \
 "

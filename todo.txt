@@ -1,12 +1,18 @@
 - [ ] 2x CAN hat support
     - [ ] udev-rules-rpi package
 - [ ] virtualization
-- [ ] userfs
+- [x] userfs
     - [ ] rootfs squashfs
-    - [ ] userfs btrfs
-    - [ ] overlayfs
+    - [x] userfs btrfs
+    - [x] overlayfs
 - [ ] wifi
-- [ ] swupdate
-    - [ ] read: <https://sbabic.github.io/swupdate/building-with-yocto.html>
-    - [ ] read: <https://mkrak.org/2018/01/26/updating-embedded-linux-devices-part2/>
-    - [ ] swupdate webserver
+- [x] swupdate
+    - [ ] swupdate_%.bbappend wwwdir?
+    - [ ] disable lua ?
+    - [ ] define TMPDIR env var to change swupdate tmp dir (define a new btrfs volume for temporary files)
+    - [x] swupdate webserver
+    - [x] enable `CONFIG_HASH_VERIFY`
+    - [x] create file in `/usr/lib/swupdate/conf.d`
+    - [x] create file in `/hwversion` to set ${MACHINE} et VERSION
+        - [x] prefer SWUPDATE_HW_COMPATIBILITY_FILE to /etc/swupdate/conf.d/hardware.sh
+    - [x] tune uboot variables to switch between the two partitions (root and root2)

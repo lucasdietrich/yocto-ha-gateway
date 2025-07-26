@@ -4,10 +4,15 @@ DESCRIPTION = "HA image minimal"
 
 LICENSE = "CLOSED"
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+
 IMAGE_INSTALL:append = "\
     packagegroup-core-boot \
     packagegroup-ha-bsp \
     packagegroup-core-base-utils \
+    swupdate \
+    swupdate-www \
+    swupdate-tools \
 "
 
 IMAGE_FEATURES += "${@bb.utils.contains('HA_DEBUG_IMAGE', '1','ssh-server-openssh', '', d)}"
@@ -53,19 +58,45 @@ TOOLCHAIN_HOST_TASK += "packagegroup-rust-cross-canadian-${MACHINE} \
                         nativesdk-systemtap \
                         "
 
+# Fix the image size and maximum to 512MiB to make sure it fits in a fixed-size partition
+# IMAGE_OVERHEAD_FACTOR = "1.0"
+# IMAGE_ROOTFS_EXTRA_SPACE = "0"
+IMAGE_ROOTFS_SIZE = "524288"
+IMAGE_ROOTFS_MAXSIZE = "524288"
 
-# BalenaEtcher fails to flash the image if it is too big
-# IMAGE_ROOTFS_SIZE = "2097152"
-# IMAGE_ROOTFS_EXTRA_SPACE = "327680"
+IMAGE_FSTYPES += "squashfs"
+IMAGE_FSTYPES += "ext3.gz"
 
+# Make sure the fstab is not altered by wic command after the rootfs is created
+# fix an issue where /etc/fstab is unaligned for .SWU and .WIC images
+WIC_CREATE_EXTRA_ARGS = "--no-fstab-update"
 WKS_FILE = "sdimage-ha-raspberrypi.wks"
 
 # TODO
 # ROOTFS_READ_ONLY ?= "1"
 
+python() {
+  d.setVarFlag("SWUPDATE_IMAGES_FSTYPES", d.getVar("IMAGE_BASENAME"), ".ext3.gz")
+}
+
+# swupdate image
+inherit swupdate-image
+
+SRC_URI += "\
+    file://sw-description \
+    file://update-script.sh \
+"
+
+# boot partition
+rootfs_fstab_boot() {
+    # Patch /etc/fstab and add boot partition mount
+    echo "/dev/mmcblk0p1	/boot	vfat	defaults	0	0" >> ${IMAGE_ROOTFS}/etc/fstab
+}
+ROOTFS_POSTPROCESS_COMMAND += "rootfs_fstab_boot; "
+
 # cgroups
 rootfs_fstab_cgroup2() {
-    # Path /etc/fstab and add cgroup2 mount
+    # Patch /etc/fstab and add cgroup2 mount
     echo "cgroup               /sys/fs/cgroup       cgroup2    defaults              0  0" >> ${IMAGE_ROOTFS}/etc/fstab
 }
 ROOTFS_POSTPROCESS_COMMAND += "rootfs_fstab_cgroup2; "

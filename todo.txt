@@ -1,4 +1,6 @@
-- [ ] 2x CAN hat support
+- [x] 2x CAN hat support
+    - [x] can0
+    - [ ] can1 (interrupt bug)
     - [ ] udev-rules-rpi package
 - [ ] virtualization
 - [x] userfs
@@ -7,6 +9,10 @@
     - [x] overlayfs
 - [ ] wifi
 - [x] swupdate
+    - [ ] allow to upgrade bootfs files
+        - [ ] kernel
+        - [ ] devicetree(s)
+        - [ ] config.txt
     - [ ] swupdate_%.bbappend wwwdir?
     - [ ] disable lua ?
     - [ ] define TMPDIR env var to change swupdate tmp dir (define a new btrfs volume for temporary files)
@@ -16,3 +22,7 @@
     - [x] create file in `/hwversion` to set ${MACHINE} et VERSION
         - [x] prefer SWUPDATE_HW_COMPATIBILITY_FILE to /etc/swupdate/conf.d/hardware.sh
     - [x] tune uboot variables to switch between the two partitions (root and root2)
+- [ ] CI/CD
+    - [ ] reintegrate jenkins builds
+    - [ ] integrate gitlab or github CI/CD 
+- [ ] factory reset command

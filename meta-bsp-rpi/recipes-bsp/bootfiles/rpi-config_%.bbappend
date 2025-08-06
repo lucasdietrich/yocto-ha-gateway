@@ -1,5 +1,7 @@
+CAN_OSCILLATOR = "16000000"
+CAN0_INTERRUPT_PIN = "23"
+
 # Read https://elinux.org/RPiconfig
-ENABLE_CAN = "1"
 
 ########################################################################
 ##      ISSUE WITH CAN1 (interrupt pin does not seems to work)        ##

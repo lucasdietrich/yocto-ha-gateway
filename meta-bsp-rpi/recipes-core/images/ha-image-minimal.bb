@@ -61,8 +61,8 @@ TOOLCHAIN_HOST_TASK += "packagegroup-rust-cross-canadian-${MACHINE} \
 # Fix the image size and maximum to 512MiB to make sure it fits in a fixed-size partition
 # IMAGE_OVERHEAD_FACTOR = "1.0"
 # IMAGE_ROOTFS_EXTRA_SPACE = "0"
-IMAGE_ROOTFS_SIZE = "524288"
-IMAGE_ROOTFS_MAXSIZE = "524288"
+IMAGE_ROOTFS_SIZE = "1048576"
+IMAGE_ROOTFS_MAXSIZE = "1048576"
 
 IMAGE_FSTYPES += "squashfs"
 IMAGE_FSTYPES += "ext3.gz"

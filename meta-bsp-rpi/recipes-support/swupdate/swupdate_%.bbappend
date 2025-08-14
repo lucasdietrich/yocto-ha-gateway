@@ -3,6 +3,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://custom-args.sh \
             file://hwrevision.in"
 
+wwwdir ?= "/www"
+
 do_install:append() {
 
     # Substitute MACHINE and DISTRO_VERSION into hwrevision

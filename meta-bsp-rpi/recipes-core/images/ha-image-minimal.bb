@@ -29,6 +29,7 @@ IMAGE_INSTALL:append = "${@bb.utils.contains('HA_DEBUG_IMAGE', '1',' \
     socat \
     valgrind \
     iperf3 \
+    smemstat \
     tcpdump \
     perf \
     curl \

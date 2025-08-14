@@ -8,4 +8,7 @@ IMAGE_INSTALL:append = "\
     libstd-rs \
     ntpd-start \
     sqlite3 \
+    podman \
+    podman-tui \
+    podman-compose \
 "

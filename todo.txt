@@ -2,12 +2,14 @@
     - [x] can0
     - [ ] can1 (interrupt bug)
     - [ ] udev-rules-rpi package
+    - [x] vcan
 - [ ] virtualization
 - [x] userfs
     - [ ] rootfs squashfs
     - [x] userfs btrfs
     - [x] overlayfs
 - [ ] wifi
+- [ ] bluetooth
 - [x] swupdate
     - [ ] allow to upgrade bootfs files
         - [ ] kernel
@@ -25,4 +27,6 @@
 - [ ] CI/CD
     - [ ] reintegrate jenkins builds
     - [ ] integrate gitlab or github CI/CD 
-- [ ] factory reset command
+- [x] factory reset command
+- [ ] replace LICENSE = "CLOSED" by MIT or APPACHE
+- [x] grafana: preconfigure dashboards

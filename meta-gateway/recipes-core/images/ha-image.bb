@@ -11,4 +11,5 @@ IMAGE_INSTALL:append = "\
     podman \
     podman-tui \
     podman-compose \
+    prometheus-grafana \
 "

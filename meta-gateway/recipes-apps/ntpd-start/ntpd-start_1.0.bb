@@ -6,6 +6,8 @@ SRC_URI = "file://ntpd"
 
 inherit update-rc.d
 
+# should be run just after dhcp has been resolved
+INITSCRIPT_PARAMS = "defaults 21"
 INITSCRIPT_NAME = "ntpd"
 
 do_install() {

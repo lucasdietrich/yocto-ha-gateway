@@ -6,7 +6,7 @@ SRC_URI += "file://0001-TCP-Remove-timeout-when-waiting-for-an-incoming-conn.pat
 
 inherit update-rc.d
 
-INITSCRIPT_PARAMS = "start 20 5 3 2 . stop 80 0 1 6 ."
+INITSCRIPT_PARAMS = "start 60 5 3 2 . stop 40 0 1 6 ."
 INITSCRIPT_NAME = "cannelloni-tcpserver.sh"
 
 do_install:append() {

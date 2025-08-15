@@ -1,0 +1,2 @@
+SUBSYSTEM=="module", KERNEL=="vcan", ACTION=="add", RUN+="/etc/udev/scripts/vcan.sh add"
+SUBSYSTEM=="module", KERNEL=="vcan", ACTION=="remove", RUN+="/etc/udev/scripts/vcan.sh remove"

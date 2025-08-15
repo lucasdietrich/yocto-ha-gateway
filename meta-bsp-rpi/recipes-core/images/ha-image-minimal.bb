@@ -13,6 +13,8 @@ IMAGE_INSTALL:append = "\
     swupdate \
     swupdate-www \
     swupdate-tools \
+    cannelloni \
+    udev-rules-rpi \
 "
 
 IMAGE_FEATURES += "${@bb.utils.contains('HA_DEBUG_IMAGE', '1','ssh-server-openssh', '', d)}"

@@ -2,19 +2,34 @@ SUMMARY = "userfs is a tool to create/manage user partitions and filesystems"
 HOMEPAGE = "https://github.com/lucasdietrich/userfs"
 LICENSE = "CLOSED"
 
-SRC_URI = "git://github.com/lucasdietrich/userfs.git;protocol=https;branch=main \
+SRC_URI = "git://github.com/lucasdietrich/userfs.git;protocol=https;branch=develop \
            file://init-user-fs.sh \
            file://factory_reset.sh \
            "
-SRCREV = "1abb038a98e40fffcdb20d7290e773fc886b47ca"
+SRCREV = "d2eb25f5042aa57f295c392dc40f992056168ce3"
 
 DEPENDS += "util-linux"
 RDEPENDS:${PN} += "util-linux-libfdisk libubootenv"
 
 inherit meson pkgconfig update-rc.d
 
-# part 0: bootfs, part 1 rootfs, part 2 rootfs2, part 3 userfs
-EXTRA_OEMESON += "-Duserfs_partno=3"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'swap-partition', d)}"
+PACKAGECONFIG[swap-partition] = " -Dswap=true -Dswap_partno=4 -Duserfs_partno=5,-Duserfs_partno=3,,,,"
+
+# WITH SWAP
+# part 0: bootfs
+# part 1 rootfs
+# part 2 rootfs2
+# part 3 extended
+# part 4 is swap
+# part 5 userfs
+
+# WITHOUT SWAP
+# part 0: bootfs
+# part 1 rootfs
+# part 2 rootfs2
+# part 3 is userfs
+
 # create overlay for /opt
 EXTRA_OEMESON += "-Doverlay_opt=true"
 

@@ -65,7 +65,7 @@ TOOLCHAIN_HOST_TASK += "packagegroup-rust-cross-canadian-${MACHINE} \
 # IMAGE_OVERHEAD_FACTOR = "1.0"
 # IMAGE_ROOTFS_EXTRA_SPACE = "0"
 IMAGE_ROOTFS_SIZE = "1048576"
-IMAGE_ROOTFS_MAXSIZE = "1048576"
+IMAGE_ROOTFS_MAXSIZE = "${IMAGE_ROOTFS_SIZE}"
 
 IMAGE_FSTYPES += "squashfs"
 IMAGE_FSTYPES += "ext3.gz"
@@ -73,7 +73,7 @@ IMAGE_FSTYPES += "ext3.gz"
 # Make sure the fstab is not altered by wic command after the rootfs is created
 # fix an issue where /etc/fstab is unaligned for .SWU and .WIC images
 WIC_CREATE_EXTRA_ARGS = "--no-fstab-update"
-WKS_FILE = "sdimage-ha-raspberrypi.wks"
+WKS_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'swap-partition', 'sdimage-ha-minimal-raspberrypi-swap.wks', 'sdimage-ha-minimal-raspberrypi.wks', d)}"
 
 # TODO
 # ROOTFS_READ_ONLY ?= "1"
@@ -96,6 +96,13 @@ rootfs_fstab_boot() {
     echo "/dev/mmcblk0p1	/boot	vfat	defaults	0	0" >> ${IMAGE_ROOTFS}/etc/fstab
 }
 ROOTFS_POSTPROCESS_COMMAND += "rootfs_fstab_boot; "
+
+# swap partition
+rootfs_fstab_swap() {
+    # Patch /etc/fstab and add swap partition mount
+    echo "/dev/mmcblk0p5	none	swap	sw	0	0" >> ${IMAGE_ROOTFS}/etc/fstab
+}
+ROOTFS_POSTPROCESS_COMMAND += "${@bb.utils.contains('DISTRO_FEATURES', 'swap-partition', 'rootfs_fstab_swap;', '', d)} "
 
 # cgroups
 rootfs_fstab_cgroup2() {

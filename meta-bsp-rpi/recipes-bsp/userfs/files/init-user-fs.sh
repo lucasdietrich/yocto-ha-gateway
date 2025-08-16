@@ -23,6 +23,10 @@ start() {
 
     # create userfs partition (btrfs)
     /usr/bin/userfs -v $flags > /run/userfs.log 2>&1
+
+    # TODO FIXME
+    # remount /var/volatile with correct options
+    mount -o remount /var/volatile
 }
 
 stop() {

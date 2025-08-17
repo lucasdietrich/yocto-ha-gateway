@@ -2,7 +2,7 @@ SUMMARY = "userfs is a tool to create/manage user partitions and filesystems"
 HOMEPAGE = "https://github.com/lucasdietrich/userfs"
 LICENSE = "CLOSED"
 
-SRC_URI = "git://github.com/lucasdietrich/userfs.git;protocol=https;branch=develop \
+SRC_URI = "git://github.com/lucasdietrich/userfs.git;protocol=https;branch=main \
            file://init-user-fs.sh \
            file://factory_reset.sh \
            "

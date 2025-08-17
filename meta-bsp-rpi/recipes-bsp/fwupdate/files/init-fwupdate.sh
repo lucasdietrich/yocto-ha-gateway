@@ -7,20 +7,20 @@
 
 create_ab_symlinks() {
     # get root partition we are currently booted from
-    current_root_part=$(fw_printenv rootpart | cut -d= -f2)
+    self_root_part=$(fw_printenv rootpart | cut -d= -f2)
 
-    if [ "$current_root_part" = "2" ]; then
+    if [ "$self_root_part" = "2" ]; then
         other_root_part="3"
     else
         other_root_part="2"
     fi
 
     # create symlinks to the current and other root partitions
-    current_root="/dev/mmcblk0p$current_root_part"
+    self_root="/dev/mmcblk0p$self_root_part"
     other_root="/dev/mmcblk0p$other_root_part"
 
     mkdir -p /dev/disk
-    ln -snf "$current_root" /dev/disk/rootfs-current
+    ln -snf "$self_root" /dev/disk/rootfs-self
     ln -snf "$other_root" /dev/disk/rootfs-other
 }
 

@@ -1,23 +1,26 @@
 - [x] 2x CAN hat support
     - [x] can0
     - [ ] can1 (interrupt bug)
-    - [ ] udev-rules-rpi package
+    - [x] udev-rules-rpi package
     - [x] vcan
-- [ ] virtualization
+- [x] virtualization
+    - [x] podman
+    - [x] podman compose
 - [x] userfs
     - [ ] rootfs squashfs
     - [x] userfs btrfs
     - [x] overlayfs
 - [ ] wifi
-- [ ] bluetooth
+- [x] bluetooth
 - [x] swupdate
     - [ ] allow to upgrade bootfs files
         - [ ] kernel
         - [ ] devicetree(s)
         - [ ] config.txt
-    - [ ] swupdate_%.bbappend wwwdir?
-    - [ ] disable lua ?
-    - [ ] define TMPDIR env var to change swupdate tmp dir (define a new btrfs volume for temporary files)
+        - look at IMAGE_BOOT_FILES and update files individually
+    - [x] swupdate_%.bbappend wwwdir?
+    - [-] disable lua ?
+    - [-] define TMPDIR env var to change swupdate tmp dir (define a new btrfs volume for temporary files)
     - [x] swupdate webserver
     - [x] enable `CONFIG_HASH_VERIFY`
     - [x] create file in `/usr/lib/swupdate/conf.d`
@@ -30,3 +33,6 @@
 - [x] factory reset command
 - [ ] replace LICENSE = "CLOSED" by MIT or APPACHE
 - [x] grafana: preconfigure dashboards
+- [ ] home assistant
+- [ ] samba
+- [ ] pi-hole: <https://hub.docker.com/r/pihole/pihole>

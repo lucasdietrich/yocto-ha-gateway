@@ -11,4 +11,5 @@ RDEPENDS:${PN} = "\
     caniot-controller \
     nginx \
     tzdata \
+    dbus \
 "

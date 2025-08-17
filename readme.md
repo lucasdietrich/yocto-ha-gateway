@@ -43,7 +43,8 @@ BBLAYERS ?= " \
 ## Machines
 
 - `rpi2ha`: Raspberry Pi 2 based HA gateway
-- `rpi3ha-64`: Raspberry Pi 3 based HA gateway (new)
+- `rpi3ha`: Raspberry Pi 3 based HA gateway
+- `rpi4ha`: Raspberry Pi 4 based HA gateway
 
 ## Images
 

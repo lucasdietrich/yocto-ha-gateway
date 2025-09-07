@@ -61,7 +61,7 @@ TOOLCHAIN_HOST_TASK += "packagegroup-rust-cross-canadian-${MACHINE} \
                         nativesdk-systemtap \
                         "
 
-# Fix the image size and maximum to 512MiB to make sure it fits in a fixed-size partition
+# Fix the image size and maximum to 1GiB to make sure it fits in a fixed-size partition
 # IMAGE_OVERHEAD_FACTOR = "1.0"
 # IMAGE_ROOTFS_EXTRA_SPACE = "0"
 IMAGE_ROOTFS_SIZE = "1048576"

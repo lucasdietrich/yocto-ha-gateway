@@ -17,7 +17,7 @@ RDEPENDS:${PN} += "podman-compose"
 inherit update-rc.d
 
 # start late
-INITSCRIPT_PARAMS = "start 99 5 3 2 . stop 10 0 1 6 ."
+INITSCRIPT_PARAMS = "start 90 5 3 2 . stop 10 0 1 6 ."
 INITSCRIPT_NAME = "${PN}.sh"
 
 S = "${WORKDIR}"

@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  homeassistant:
+    image: docker.io/homeassistant/home-assistant:stable
+    container_name: homeassistant
+    environment:
+      - TZ=Europe/Paris
+      - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+    network_mode: host
+    ports:
+      - 8123:8123
+    volumes:
+      - /opt/hass/config:/config
+      - /run/dbus/system_bus_socket:/host/run/dbus/system_bus_socket:ro
+    restart: always

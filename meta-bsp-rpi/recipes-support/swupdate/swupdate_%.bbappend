@@ -3,7 +3,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://custom-args.sh \
             file://hwrevision.in"
 
-wwwdir ?= "/www"
+wwwdir = "/www/swupdate"
 
 do_install:append() {
 

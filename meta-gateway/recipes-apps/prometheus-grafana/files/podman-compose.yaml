@@ -6,11 +6,15 @@ services:
     container_name: prometheus
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus-data:/prometheus
+      - /var/lib/prometheus:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.retention.time=365d'
-    network_mode: host
+      - '--web.external-url=/prometheus/'
+      - '--web.route-prefix=/prometheus/'
+    #network_mode: host
+    networks:
+      - monitor_net
     ports:
       - "9090:9090"
     restart: always
@@ -23,11 +27,15 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=ha
       - GF_SECURITY_ADMIN_PASSWORD=ha
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
+      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/grafana/
     volumes:
-      - grafana-storage:/var/lib/grafana
+      - /var/lib/grafana:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/var/lib/grafana/dashboards
-    network_mode: host
+    #network_mode: host
+    networks:
+      - monitor_net
     ports:
       - "3000:3000"
     restart: always
@@ -38,6 +46,7 @@ services:
     image: docker.io/prom/node-exporter:latest
     container_name: node_exporter
     command:
+#      - '--web.telemetry-path="/node_exporter/metrics"'
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
       - '--path.rootfs=/rootfs'
@@ -48,12 +57,18 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /:/rootfs:ro
-    network_mode: host
+    #network_mode: host
+    networks:
+      - monitor_net
     ports:
       - "9100:9100"
     restart: always
     pid: host
 
-volumes:
-  grafana-storage:
-  prometheus-data:
+networks:
+  monitor_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.89.50.0/24
+          gateway: 10.89.50.1

@@ -19,8 +19,19 @@ set -e
 
 do_start() {
     echo "Starting $DESC"
+
+    # ensure the bind mount directories exist
+    mkdir -p /var/lib/grafana /var/lib/prometheus
+
+    # ensure correct ownership
+    # - Grafana runs as UID 472
+    # - Prometheus runs as nobody (UID 65534)
+    chown 472:472 /var/lib/grafana
+    chown 65534:65534 /var/lib/prometheus
+
     cd "$STACK_DIR" || exit 1
-    $CMD up -d
+    $CMD down || true # stop any existing stack
+    $CMD up -d > /run/podman-grafana-stack.log 2>&1
 }
 
 do_stop() {

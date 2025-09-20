@@ -8,18 +8,17 @@ inherit cargo-update-recipe-crates
 
 # how to get caniot-controller could be as easy as but default to a git checkout:
 # SRC_URI += "crate://crates.io/caniot-controller/0.2.0"
-SRC_URI += "git://github.com/lucasdietrich/caniot-rust-controller.git;protocol=https;nobranch=1;branch=develop"
-SRCREV = "3805b0ec180d29858ca831b176f1d16a9ca3d87a"
+SRC_URI += "git://github.com/lucasdietrich/caniot-rust-controller.git;protocol=https;nobranch=1;branch=feature/linky"
+SRCREV = "2524a264f3ca387b84f71f84ea9a045b0fee5b7e"
 S = "${WORKDIR}/git"
 CARGO_SRC_DIR = ""
-PV:append = ".AUTOINC+08d9c5f2aa"
 
 SRC_URI += "git://github.com/socketcan-rs/socketcan-rs.git;protocol=https;nobranch=1;name=socketcan;destsuffix=socketcan \
             git://github.com/lucasdietrich/zephyr-linux-ble-copro.git;protocol=https;nobranch=1;name=ble-copro-stream-server;destsuffix=ble-copro-stream-server;subpath=ble-copro-stream-server-rs \
             "
 
 SRCREV_FORMAT .= "_ble-copro-stream-server"
-SRCREV_ble-copro-stream-server = "d003d303169fb21a0ee4956531362db2b9f4448e"
+SRCREV_ble-copro-stream-server = "9f462c90b3b7cfb2229270d4bae113665be7a40c"
 SRCREV_FORMAT .= "_socketcan"
 SRCREV_socketcan = "c3004f0d7c600cd3964cd8655fd26f670d7c87e7"
 

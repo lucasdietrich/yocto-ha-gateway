@@ -27,6 +27,8 @@ IMAGE_INSTALL:append = "${@bb.utils.contains('HA_DEBUG_IMAGE', '1',' \
     btrfs-tools \
     gdbserver \
     htop \
+    iotop \
+    lsof \
     strace \
     socat \
     valgrind \

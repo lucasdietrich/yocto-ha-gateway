@@ -4,6 +4,7 @@ LICENSE = "CLOSED"
 
 SRC_URI = "file://init-hass.sh \
            file://podman-compose.yaml \
+           file://configuration.yaml \
            "
 
 RDEPENDS:${PN} += "podman-compose dbus"
@@ -23,7 +24,12 @@ do_install() {
     install -d ${D}/opt/hass
     install -m 0644 ${WORKDIR}/podman-compose.yaml ${D}/opt/hass/podman-compose.yaml
 
-    install -d ${D}/opt/hass/config
+    install -d ${D}/var/lib/homeassistant
+    # chown 1000:1000 ${D}/var/lib/homeassistant
+    install -m 0644 ${WORKDIR}/configuration.yaml ${D}/var/lib/homeassistant/configuration.yaml
+    echo "[]" >> ${D}/var/lib/homeassistant/automations.yaml
+    touch ${D}/var/lib/homeassistant/scenes.yaml
+    touch ${D}/var/lib/homeassistant/scripts.yaml
 }
 
 FILES:${PN} += " /opt/hass"

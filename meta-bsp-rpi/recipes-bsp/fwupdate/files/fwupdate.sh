@@ -35,7 +35,7 @@ case "$1" in
     abort_update)
         echo "Aborting update..."
 
-        # set ustate to 0 to indicate no update is in progress
+        # set ustate to 0 to indicate no update is no longer in progress
         fw_setenv ustate 0
 
         # revert to the current root partition

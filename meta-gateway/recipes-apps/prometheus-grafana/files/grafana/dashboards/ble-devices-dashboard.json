@@ -104,8 +104,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "eev29jow0gohsb"
+            "type": "prometheus"
           },
           "editorMode": "builder",
           "expr": "device_temperature",

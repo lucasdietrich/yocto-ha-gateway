@@ -26,6 +26,49 @@ heaters_did = 1
 garage_did = 16
 outdoor_alarm_did = 24
 
+[ui]
+message = "Bienvenue sur votre contrôleur Caniot !"
+
+[[ui.shortcut]]
+name = "Grafana"
+url = "/grafana"
+icon = "grafana"
+menu_order = "before_settings"
+order = 10
+target_blank = false
+badge = true
+badge_color = "red"
+
+[[ui.shortcut]]
+name = "Prometheus"
+url = "/prometheus"
+icon = "prometheus"
+menu_order = "before_settings"
+order = 11
+target_blank = false
+badge = true
+badge_color = "red"
+
+[[ui.shortcut]]
+name = "swupdate"
+url = "/swupdate"
+icon = "swupdate"
+menu_order = "end"
+order = 90
+target_blank = false
+badge = true
+badge_color = "blue"
+
+[[ui.shortcut]]
+name = "Home Assistant"
+url = "http://ha.local.lan/"
+icon = "homeassistant"
+menu_order = "after_home"
+order = 2
+target_blank = true
+badge = true
+badge_color = "red"
+
 [ha]
 
 [copro]

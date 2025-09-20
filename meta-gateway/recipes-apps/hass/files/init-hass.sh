@@ -19,8 +19,16 @@ set -e
 
 do_start() {
     echo "Starting $DESC"
+
+    # ensure the bind mount directories exist
+    mkdir -p /var/lib/homeassistant
+
+    # ensure correct ownership: Home Assistant runs as UID 1000
+    chown 1000:1000 /var/lib/homeassistant 
+
     cd "$STACK_DIR" || exit 1
-    $CMD up -d
+    $CMD down || true # stop any existing stack
+    $CMD up -d > /run/podman-hass.log 2>&1
 }
 
 do_stop() {

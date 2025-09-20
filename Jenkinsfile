@@ -72,11 +72,6 @@ pipeline {
             defaultValue: '',
             description: 'WiFi password for initial setup',
         )
-        string(
-            name: 'BUILD_NUMBER',
-            defaultValue: '0',
-            description: 'Build number to append to image name',
-        )
         choice(
             name: 'DEBUG',
             choices: ['0', '1'],
@@ -95,14 +90,7 @@ pipeline {
     }
 
     stages {
-        stage('Init') {
-            steps {
-                script {
-                    buildNumber = "${params.IMAGE}-${params.MACHINE}-${params.DISTRO}-${BUILD_NUMBER}"
-                }
-            }
-        }
-
+        
         stage('Git checkout submodules') {
             steps {
                 sh 'git submodule update --init --recursive'

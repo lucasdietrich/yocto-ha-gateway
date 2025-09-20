@@ -57,10 +57,10 @@ pipeline {
             choices: ['ha'],
             description: 'Distro to build for',
         )
-        choice(
-            name: 'DEBUG',
-            choices: ['0', '1'],
-            description: 'Enable debug options (adds debug tools, enables ssh, sets root password to "root")',
+        string(
+            name: 'HA_ROOT_PASSWORD',
+            defaultValue: '$5$i2vQ16WOMEpOajYi$zXVuoyLsBzoKS7Cgdk3VrFOom9zNfQIW2hGC/yxPfZ9',
+            description: 'Root password hash (default is "root")',
         )
         string(
             name: 'WIFI_SSID',
@@ -71,6 +71,26 @@ pipeline {
             name: 'WIFI_PASSWORD',
             defaultValue: '',
             description: 'WiFi password for initial setup',
+        )
+        string(
+            name: 'BUILD_NUMBER',
+            defaultValue: '0',
+            description: 'Build number to append to image name',
+        )
+        choice(
+            name: 'DEBUG',
+            choices: ['0', '1'],
+            description: 'Enable debug options (adds debug tools, enables ssh, sets root password to "root")',
+        )
+        choice(
+            name: 'HA_DEBUG_UTILS',
+            choices: ['1', '0'],
+            description: 'Include debug utilities (e2fsprogs-resize2fs, util-linux)',
+        )
+        choice(
+            name: 'HA_DEBUG_SSH',
+            choices: ['0', '1'],
+            description: 'Enable SSH debug features',
         )
     }
 
@@ -111,6 +131,9 @@ pipeline {
                     echo 'DISTRO = "${params.DISTRO}"' >> ${env.WORKSPACE_BUILD_DIR}/conf/local.conf
                     echo 'LICENSE_FLAGS_ACCEPTED = "commercial synaptics-killswitch"' >> ${env.WORKSPACE_BUILD_DIR}/conf/local.conf
                     echo 'HA_DEBUG_IMAGE = "${params.DEBUG}"' >> ${env.WORKSPACE_BUILD_DIR}/conf/local.conf
+                    echo 'HA_DEBUG_UTILS = "${params.HA_DEBUG_UTILS}"' >> ${env.WORKSPACE_BUILD_DIR}/conf/local.conf
+                    echo 'HA_DEBUG_SSH = "${params.HA_DEBUG_SSH}"' >> ${env.WORKSPACE_BUILD_DIR}/conf/local.conf
+                    echo 'HA_ROOT_PASSWORD = "${params.HA_ROOT_PASSWORD}"' >> ${env.WORKSPACE_BUILD_DIR}/conf/local.conf
                     echo 'HA_DEBUG_STATIC_IP = "0"' >> ${env.WORKSPACE_BUILD_DIR}/conf/local.conf
                     echo 'HA_DEBUG_WIFI_SSID = "${params.WIFI_SSID}"' >> ${env.WORKSPACE_BUILD_DIR}/conf/local.conf
                     echo 'HA_DEBUG_WIFI_PASSWORD = "${params.WIFI_PASSWORD}"' >> ${env.WORKSPACE_BUILD_DIR}/conf/local.conf

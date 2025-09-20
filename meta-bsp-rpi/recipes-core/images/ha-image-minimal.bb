@@ -17,9 +17,7 @@ IMAGE_INSTALL:append = "\
     udev-rules-rpi \
 "
 
-IMAGE_FEATURES += "${@bb.utils.contains('HA_DEBUG_IMAGE', '1','ssh-server-openssh', '', d)}"
-
-IMAGE_INSTALL:append = "${@bb.utils.contains('HA_DEBUG_IMAGE', '1',' \
+IMAGE_INSTALL:append = "${@bb.utils.contains('HA_DEBUG_UTILS', '1',' \
     util-linux \
     e2fsprogs-resize2fs \
     e2fsprogs-e2fsck \
@@ -48,13 +46,29 @@ IMAGE_INSTALL:append = "${@bb.utils.contains('HA_DEBUG_IMAGE', '1',' \
     mosquitto-clients \
 ', '', d)}"
 
-EXTRA_IMAGE_FEATURES = "${@bb.utils.contains('HA_DEBUG_IMAGE', '1',' \
+IMAGE_FEATURES += "ssh-server-openssh"
+
+EXTRA_IMAGE_FEATURES = "\
+    allow-root-login \
+"
+
+EXTRA_IMAGE_FEATURES += "${@bb.utils.contains('HA_DEBUG_SSH', '1',' \
     debug-tweaks \
     empty-root-password \
     allow-empty-password \
-    allow-root-login \
     post-install-logging \
 ', '', d)}"
+
+inherit extrausers
+
+# Use mkpasswd tool (can be obtained through package whois on debian) to generate a password hash:
+#       printf "%q" $(mkpasswd -m sha256crypt mypassword)
+
+# defaults to "root"
+HA_ROOT_PASSWORD ?= "\$5\$i2vQ16WOMEpOajYi\$zXVuoyLsBzoKS7Cgdk3VrFOom9zNfQIW2hGC/yxPfZ9"
+EXTRA_USERS_PARAMS = "\
+        usermod -p '${HA_ROOT_PASSWORD}' root; \
+        "
 
 TOOLCHAIN_HOST_TASK += "packagegroup-rust-cross-canadian-${MACHINE} \
                         nativesdk-umoci \

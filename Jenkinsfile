@@ -59,7 +59,7 @@ pipeline {
         )
         string(
             name: 'HA_ROOT_PASSWORD',
-            defaultValue: '$5$i2vQ16WOMEpOajYi$zXVuoyLsBzoKS7Cgdk3VrFOom9zNfQIW2hGC/yxPfZ9',
+            defaultValue: '\\$5\\$i2vQ16WOMEpOajYi\\$zXVuoyLsBzoKS7Cgdk3VrFOom9zNfQIW2hGC/yxPfZ9',
             description: 'Root password hash (default is "root")',
         )
         string(

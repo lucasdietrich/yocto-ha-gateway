@@ -61,7 +61,7 @@ badge_color = "blue"
 
 [[ui.shortcut]]
 name = "Home Assistant"
-url = "http://ha.local.lan/"
+url = "http://hass.local.lan/"
 icon = "homeassistant"
 menu_order = "after_home"
 order = 2

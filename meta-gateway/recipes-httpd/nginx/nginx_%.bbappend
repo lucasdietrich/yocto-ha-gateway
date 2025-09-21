@@ -26,7 +26,7 @@ PACKAGECONFIG[homeassistant] = ""
 
 do_install:append() {
     # install pycancontroller_server site
-    if [ "${@bb.utils.contains('PACKAGECONFIG', 'pycancontroller', '1', '0', d)}" != "1" ]; then
+    if [ "${@bb.utils.contains('PACKAGECONFIG', 'pycancontroller', '1', '0', d)}" = "1" ]; then
         install -Dm 0644 ${WORKDIR}/pycancontroller_server.site ${D}${sysconfdir}/nginx/sites-available/pycancontroller_server
         ln -s ../sites-available/pycancontroller_server ${D}${sysconfdir}/nginx/sites-enabled/
     fi

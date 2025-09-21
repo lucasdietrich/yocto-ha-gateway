@@ -7,9 +7,19 @@ services:
       - TZ=Europe/Paris
       - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
     # network_mode: host
+    networks:
+      - hass_net
     ports:
       - 8123:8123
     volumes:
       - /var/lib/homeassistant:/config
       - /run/dbus/system_bus_socket:/host/run/dbus/system_bus_socket:ro
     restart: always
+
+networks:
+  hass_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.89.51.0/24
+          gateway: 10.89.51.1

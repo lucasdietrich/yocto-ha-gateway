@@ -4,4 +4,6 @@ IMAGE_INSTALL:append = "\
     tzdata \
     openssl \
     mbedtls \
+    sqlite3 \
+    libstd-rs \
 "

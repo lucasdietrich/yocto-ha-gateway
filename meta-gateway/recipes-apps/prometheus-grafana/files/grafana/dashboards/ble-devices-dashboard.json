@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -100,7 +100,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.2.0-16979757807",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
@@ -108,7 +108,7 @@
           },
           "editorMode": "builder",
           "expr": "device_temperature",
-          "legendFormat": "{{name}} ({{mac}})",
+          "legendFormat": "{{name}} ({{sensor}} {{mac}})",
           "range": true,
           "refId": "A"
         }
@@ -124,11 +124,12 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "BLE devices",
-  "version": 4
+  
+  "version": 1
 }

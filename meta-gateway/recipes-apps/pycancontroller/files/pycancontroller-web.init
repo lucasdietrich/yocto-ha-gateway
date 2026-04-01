@@ -13,18 +13,19 @@ DAEMON=/usr/bin/python3
 NAME=pycancontroller-web
 DESC="CANIOT Python WEB"
 ARGS="-m cancontroller.httpserver.server --config=/etc/pycancontroller/config.toml"
+PIDFILE=/var/run/$NAME.pid
 
 test -f $DAEMON || exit 0
 
 case "$1" in
     start)
         echo -n "* Start $DESC: $NAME... "
-        CANIOT_PYCONTROLLER_PYTHONPATH_AUTO_ADD= start-stop-daemon -S -b -x $DAEMON --name $NAME -- $ARGS
+        CANIOT_PYCONTROLLER_PYTHONPATH_AUTO_ADD= start-stop-daemon -S -b -m -p $PIDFILE -x $DAEMON -- $ARGS
 	    echo "$NAME."
     ;;
     stop)
         echo -n "* Stopping $DESC: $NAME... "
-        start-stop-daemon -K -x $DAEMON
+        start-stop-daemon -K -p $PIDFILE
 	    echo "$NAME."
     ;;
     restart)

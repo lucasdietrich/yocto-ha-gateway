@@ -12,4 +12,5 @@ RDEPENDS:${PN} = "\
     nginx \
     tzdata \
     dbus \
+    syslog-ng \
 "

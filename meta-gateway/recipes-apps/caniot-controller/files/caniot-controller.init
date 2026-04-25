@@ -16,6 +16,9 @@ EXE=/usr/bin/caniot-controller
 CONFIG=/etc/caniot-controller/caniot-controller.toml
 ARGS="-c $CONFIG"
 
+export LOG_TO_SYSLOG=1
+export LOG_LEVEL=info
+
 test -f $EXE || exit 0
 
 case "$1" in

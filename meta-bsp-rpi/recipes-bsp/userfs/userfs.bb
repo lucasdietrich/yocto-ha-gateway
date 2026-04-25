@@ -2,11 +2,12 @@ SUMMARY = "userfs is a tool to create/manage user partitions and filesystems"
 HOMEPAGE = "https://github.com/lucasdietrich/userfs"
 LICENSE = "CLOSED"
 
-SRC_URI = "git://github.com/lucasdietrich/userfs.git;protocol=https;branch=main \
+SRC_BRANCH ?= "develop"
+SRC_URI = "git://github.com/lucasdietrich/userfs.git;protocol=https;branch=${SRC_BRANCH} \
            file://init-user-fs.sh \
            file://factory_reset.sh \
            "
-SRCREV = "d2eb25f5042aa57f295c392dc40f992056168ce3"
+SRCREV = "013f397c1fcf099763831747f1ec1a630e055d58"
 
 DEPENDS += "util-linux"
 RDEPENDS:${PN} += "util-linux-libfdisk libubootenv"
@@ -45,4 +46,9 @@ do_install:append() {
     install -m 0755 ${WORKDIR}/init-user-fs.sh ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
 
     install -m 0755 ${WORKDIR}/factory_reset.sh ${D}${bindir}/factory_reset
+
+    # create /opt directory for overlay
+    install -d ${D}/opt
 }
+
+FILES:${PN} += "/opt"

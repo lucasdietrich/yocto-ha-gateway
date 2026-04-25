@@ -11,9 +11,9 @@ inherit cargo-update-recipe-crates
 # DEFAULT_PREFERENCE = "-1"
 
 # how to get caniot-controller could be as easy as but default to a git checkout:
-SRC_BRANCH ?= "feature/ble-app-yocto-integration"
+SRC_BRANCH ?= "develop"
 SRC_URI += "git://github.com/lucasdietrich/caniot-rust-controller.git;protocol=https;nobranch=1;branch=${SRC_BRANCH}"
-SRCREV = "889522ac1784d0a453bb5a08f15003babecb6bb6"
+SRCREV = "3e2ed76691b5eb66e9fc686fdf1bff3d9a35cc8d"
 S = "${WORKDIR}/git"
 
 CARGO_SRC_DIR = ""

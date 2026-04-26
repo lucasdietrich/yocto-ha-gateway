@@ -2,7 +2,7 @@
 #!/bin/bash
 
 machine="rpi3ha"
-image=ha-image
+image=ha-image-lw
 swu_path="build/tmp-${machine}/deploy/images/${machine}/${image}-${machine}.rootfs.swu"
 
 ip="192.168.10.244"

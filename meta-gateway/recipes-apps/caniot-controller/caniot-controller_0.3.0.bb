@@ -13,7 +13,7 @@ inherit cargo-update-recipe-crates
 # how to get caniot-controller could be as easy as but default to a git checkout:
 SRC_BRANCH ?= "develop"
 SRC_URI += "git://github.com/lucasdietrich/caniot-rust-controller.git;protocol=https;nobranch=1;branch=${SRC_BRANCH}"
-SRCREV = "3e2ed76691b5eb66e9fc686fdf1bff3d9a35cc8d"
+SRCREV = "b07961e54e899b5dd580f6fd54202a5b7c77e5bd"
 S = "${WORKDIR}/git"
 
 CARGO_SRC_DIR = ""

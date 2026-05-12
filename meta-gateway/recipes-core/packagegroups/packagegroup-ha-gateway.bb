@@ -13,4 +13,6 @@ RDEPENDS:${PN} = "\
     tzdata \
     dbus \
     syslog-ng \
+    logrotate \
+    cronie \
 "

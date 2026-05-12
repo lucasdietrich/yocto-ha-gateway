@@ -1,11 +1,13 @@
 /var/log/caniot-controller.log {
-    size 50M
-    rotate 5
+    daily
+    size 10M
+    rotate 14
     missingok
     notifempty
     compress
-    delaycompress
     postrotate
-        /usr/lib/syslog-ng/syslog-ng-ctl reload 2>/dev/null || true
+        /etc/init.d/syslog reload 2>/dev/null || true
     endscript
+    dateext
+    dateformat -%Y-%m-%d-%H-%M-%S
 }

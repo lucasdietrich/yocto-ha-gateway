@@ -7,4 +7,6 @@ IMAGE_INSTALL:append = "\
     minicom \
     picocom \
     tmux \
+    usbip-tools \
+    usbids \
 "
